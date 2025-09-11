@@ -1,0 +1,48 @@
+{
+  "name": "srcmap",
+  "version": "1.0.0",
+  "description": "从SourceMap文件中提取源代码文件，支持模块化处理和多种选项",
+  "main": "index.js",
+  "bin": {
+    "srcmap": "./dist/srcmap.bundle.js"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node index.js",
+    "build": "esbuild index.js --bundle --platform=node --target=node18 --outfile=dist/srcmap.bundle.js --format=cjs",
+    "buildm": "esbuild index.js --bundle --platform=node --target=node18 --outfile=dist/srcmap.bundle.js --format=cjs --minify",
+    "build:watch": "esbuild index.js --bundle --platform=node --target=node18 --outfile=dist/srcmap.bundle.js --format=cjs --watch",
+    "clean": "rm -rf dist && mkdir -p dist",
+    "prebuild": "npm run clean",
+    "test": "npm run build && node dist/srcmap.bundle.js webpackcases/react.json --dry-run --verbose",
+    "test:real": "npm run build && node dist/srcmap.bundle.js app-bb7cb88e877f84f437d5.js.map --dry-run --verbose"
+  },
+  "dependencies": {
+   
+  },
+  "devDependencies": {
+    "esbuild": "^0.20.0"
+  },
+  "keywords": [
+    "sourcemap",
+    "extract",
+    "webpack",
+    "javascript",
+    "bundle",
+    "reverse-engineering"
+  ],
+  "author": "ryh",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ryh/srcmap.git"
+  },
+  "homepage": "https://github.com/ryh/srcmap#readme",
+  "bugs": {
+    "url": "https://github.com/ryh/srcmap/issues"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "packageManager": "pnpm@10.15.1"
+}
