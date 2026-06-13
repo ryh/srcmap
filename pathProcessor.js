@@ -114,12 +114,15 @@ class PathProcessor {
     
     // 移除开头的 ~/ 
     pathStr = pathStr.replace(/^~\//, '');
+    pathStr = pathStr.replace('_N_E/', '');
     
-    // 处理相对路径 ../
-    pathStr = pathStr.replace(/\.\.\//g, 'parent/');
+    // 处理相对路径 - 使用 path.normalize 正确解析
+    pathStr = path.normalize(pathStr);
     
-    // 移除多余的 .. 
-    pathStr = pathStr.replace(/\.\.\//g, '');
+    // 防止路径逃逸到上层目录
+    while (pathStr.startsWith('../') || pathStr === '..') {
+      pathStr = pathStr.substring(3);
+    }
     
     // 处理当前目录引用 ./
     if (pathStr.startsWith('./')) {

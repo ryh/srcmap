@@ -70,7 +70,7 @@ function parseArgs(args = process.argv.slice(2)) {
   --dry-run, -d    模拟运行，不实际写入文件
   --verbose, -v    显示详细处理日志
   --output, -o     指定输出目录 (默认: ./source)
-  v1.3
+  v1.4.1
   `);
     process.exit(1);
   }
